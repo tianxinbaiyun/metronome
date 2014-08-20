@@ -65,7 +65,7 @@ class ReplyController extends BaseController {
         }
 
         $reply->load('topic', 'topic.user');
-        $reply->content = $reply->texts()->first()->markdown;
+        $reply->content = $reply->text->markdown;
 
         return View::make('reply.edit')
             ->withTitle(Lang::get('locale.edit_reply'))
@@ -80,7 +80,7 @@ class ReplyController extends BaseController {
             $markdown = (new Metronome\Utils\At(Input::get('content')))->content();
             $markup = Sanitization::make(Markdown::make($markdown));
 
-            $text = $reply->texts()->first();
+            $text = $reply->text;
             $text->markdown = $markdown;
             $text->markup = $markup;
             $text->save();

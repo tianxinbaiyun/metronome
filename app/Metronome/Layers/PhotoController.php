@@ -29,13 +29,9 @@ class PhotoController extends BaseController {
 
         $user = Auth::user();
 
-        $photo = new Photo([
-            'hash'           => $hash,
-            'imageable_id'   => $user->id,
-            'imageable_type' => 'User'
-        ]);
-
-        $user->photos()->save($photo);
+        $user->photos()->save(new Photo([
+            'hash' => $hash
+        ]));
 
         return Redirect::to('admin/photos');
     }
