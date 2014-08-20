@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration {
             $table->string('locale')->default('zh');
             $table->string('remember_token')->nullable();
             $table->integer('notification_level')->default(0);
+            $table->integer('contributions')->default(0);
             $table->boolean('backendable')->default(false);
             $table->boolean('verified')->default(false);
             $table->timestamp('locked_at')->nullable();

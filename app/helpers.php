@@ -83,7 +83,7 @@ Str::macro('avatarUrl', function($email = null)
 Str::macro('gravatarUrl', function($email = null, $size = null)
 {
     // md5(strtolower(trim()))
-    return join('', ['http://www.gravatar.com/avatar/', md5($email), '?s=', $size ?: 92, '&d=', urlencode('https://avatars3.githubusercontent.com/u/5574090'), '&r=pg']);
+    return join('', ['http://www.gravatar.com/avatar/', md5($email), '?s=', $size ?: 92, '&d=', urlencode(Config::get('website.avatar_url')), '&r=pg']);
 });
 
 Str::macro('calculateScore', function($count, $hour_age, $gravity = 1.8)

@@ -1,24 +1,5 @@
 <?php
 
-/**
- * User Table Schema Information
- * -----------------------------
- * id                 :integer
- * password           :string
- * avatar_url         :string
- * email              :string   unique
- * username           :string   unique
- * downcase           :string   unique
- * locale             :string   default('zh')
- * remember_token     :string   nullable
- * notification_level :integer  default(0)
- * backendable        :boolean  default(false)
- * verified           :boolean  default(false)
- * locked_at          :datetime nullable
- * created_at         :datetime
- * updated_at         :datetime
- */
-
 class UserTest extends TestCase {
 
     protected $user;

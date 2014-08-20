@@ -16,15 +16,6 @@ Route::group([
     Route::get('{username}', 'UserController@show');
 });
 
-Route::group([
-    'domain'    => Config::get('website.blog_url'),
-    'namespace' => 'Metronome\Layers'
-], function()
-{
-    Route::get('/', 'PostController@index');
-    Route::get('post/{slug}', 'PostController@show');
-});
-
 Route::group(['prefix'=>'admin', 'namespace'=>'Metronome\Layers'], function()
 {
     Route::get('/', 'TopicController@index');

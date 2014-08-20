@@ -2,14 +2,6 @@
 
 return [
 
-    'logo'        => 'Metronome',
-    'version'     => 'beta',
-    'title'       => 'Metronome',
-    'keywords'    => 'Metronome',
-    'description' => 'Metronome',
-    'copyright'   => '© 2014 Metronome · All rights reserved.',
+    'owners'       => array('menglr@live.io'),
 
-    'owners' => [
-        'menglr@live.com'
-    ],
 ];

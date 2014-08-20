@@ -12,7 +12,6 @@ class CreatePhotosTable extends Migration {
             $table->increments('id');
             $table->string('hash');
             $table->string('note')->nullable();
-            $table->integer('user_id')->index();
             $table->integer('imageable_id')->index();
             $table->integer('imageable_type')->index();
             $table->timestamps();

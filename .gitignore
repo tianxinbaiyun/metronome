@@ -1,4 +1,5 @@
 .sass-cache/
 vendor/
+*.env.*.php
 *.lock
 *.log
