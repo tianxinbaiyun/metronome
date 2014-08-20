@@ -16,10 +16,9 @@ class UserTest extends TestCase {
     {
         $this->assertInstanceOf('User', $this->user);
         $this->assertInternalType('string', $this->user->username);
-        $this->assertInternalType('string', $this->user->backendable);
         $this->assertContains('@', $this->user->email);
         $this->assertRegExp('/[a-z0-9]+/', $this->user->downcase);
-        // assertCount
+        $this->assertCount(1, User::all());
     }
 
     public function testNormalUser()
@@ -35,6 +34,41 @@ class UserTest extends TestCase {
     public function testStat()
     {
         $this->assertInstanceOf('Stat', $this->user->stat);
+    }
+
+    public function testTopics()
+    {
+        $this->assertInstanceOf('Topic', $this->user->topics->first());
+    }
+
+    public function testFollowers()
+    {
+
+    }
+
+    public function testFollowing()
+    {
+
+    }
+
+    public function testReplies()
+    {
+
+    }
+
+    public function testLiking()
+    {
+
+    }
+
+    public function testEvents()
+    {
+
+    }
+
+    public function testPhotos()
+    {
+
     }
 
     public function tearDown()

@@ -7,7 +7,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
     protected $table = 'users';
 
-    protected $hidden = array('password');
+    protected $hidden = ['password', 'remember_token'];
 
     protected $fillable = ['email', 'username', 'downcase'];
 
@@ -56,11 +56,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return ! $this->backendable;
     }
 
-    public function topics()
-    {
-        return $this->hasMany('Topic');
-    }
-
     public function profile()
     {
         return $this->hasOne('Profile');
@@ -69,6 +64,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function stat()
     {
         return $this->hasOne('Stat');
+    }
+
+    public function topics()
+    {
+        return $this->hasMany('Topic');
     }
 
     public function followers()
@@ -98,7 +98,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
     public function photos()
     {
-        return $this->hasMany('Photo');
+        return $this->morphMany('Photo', 'imageable');
     }
 
     public function scopeNormal($query)
