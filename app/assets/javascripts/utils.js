@@ -31,6 +31,7 @@ $(document).on('page:fetch', function(){
 
 $(document).on('page:change', function(){
     var selection = $('.category.selection>a');
+    var numberOfTab = $('ul.tab').data('number');
     $('.spinner').fadeOut();
     $('.user-opt').dropdown();
     $('span.timeago').timeago();
@@ -46,6 +47,11 @@ $(document).on('page:change', function(){
             selection.removeClass('selected');
             $(this).addClass('selected');
         };
+    });
+    $('ul.tab>li').each(function(index){
+        if (index == numberOfTab) {
+            $(this).addClass('actived');
+        }
     });
     $('pre').addClass('prettyprint');
     prettyPrint();

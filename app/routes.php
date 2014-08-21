@@ -90,6 +90,7 @@ Route::get('{username}/replies', 'UserController@replies');
 Route::get('{username}/following', 'UserController@following');
 Route::get('{username}/followers', 'UserController@followers');
 Route::get('{username}/watching', 'UserController@watching');
+Route::get('{username}/photos', 'UserController@photos');
 
 Route::get('forgot_password', 'ReminderController@getRemind');
 Route::post('password/remind', 'ReminderController@postRemind');

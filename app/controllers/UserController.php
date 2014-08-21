@@ -240,4 +240,9 @@ class UserController extends BaseController {
             ->withUser(Auth::user())
             ->withTitle(Lang::get('locale.watching'));
     }
+
+    public function photos($username)
+    {
+
+    }
 }

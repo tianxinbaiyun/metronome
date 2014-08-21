@@ -3,13 +3,7 @@
 @section('main')
     <div class="boxify">
         <div class="user tab">
-            <ul class="tab tab-five">
-                <li class="actived">{{ HTML::user($user) }}</li>
-                <li>{{ HTML::activity($user) }}</li>
-                <li>{{ HTML::topics($user) }}</li>
-                <li>{{ HTML::followers($user) }}</li>
-                <li>{{ HTML::following($user) }}</li>
-            </ul>
+            @include('user.profile._tab')
         </div>
         <div class="user profile show">
             <p>

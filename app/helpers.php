@@ -1,20 +1,5 @@
 <?php
 
-HTML::macro('followers', function($user)
-{
-    return link_to(join('/', [$user->username, 'followers']), trans('locale.followers'));
-});
-
-HTML::macro('following', function($user)
-{
-    return link_to(join('/', [$user->username, 'following']), trans('locale.following'));
-});
-
-HTML::macro('activity', function($user)
-{
-    return link_to(join('?', [$user->username, 'tab=activity']), trans('locale.activity'));
-});
-
 HTML::macro('replies', function($user)
 {
     return link_to(join('/', [$user->username, 'replies']), trans('locale.reply'));
@@ -38,11 +23,6 @@ HTML::macro('watching', function($user)
 HTML::macro('likes', function($user)
 {
     return link_to(join('/', [$user->username, 'likes']), trans('locale.likes'));
-});
-
-HTML::macro('user', function($user)
-{
-    return join('', ['<a href="', url($user->username), '" class="avatar-sp">', HTML::image($user->avatar_url), '</a>']);
 });
 
 HTML::macro('categories', function()
@@ -94,4 +74,33 @@ Str::macro('calculateScore', function($count, $hour_age, $gravity = 1.8)
 Str::macro('matching', function($matcher)
 {
     return join($matcher, ['%', '%']);
+});
+
+/**
+ * User Url Helpers
+ */
+
+Str::macro('usernameUrl', function($user)
+{
+    return url($user->username);
+});
+
+Str::macro('followingUrl', function($user)
+{
+    return url(join('/', [$user->username, 'following']));
+});
+
+Str::macro('followersUrl', function($user)
+{
+    return url(join('/', [$user->username, 'followers']));
+});
+
+Str::macro('activityUrl', function($user)
+{
+    return url(join('?tab=', [$user->username, 'activity']));
+});
+
+Str::macro('topicUrl', function($user)
+{
+    return url(join('?tab=', [$user->username, 'topic']));
 });
