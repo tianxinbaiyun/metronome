@@ -1,50 +1,5 @@
 <?php
 
-HTML::macro('replies', function($user)
-{
-    return link_to(join('/', [$user->username, 'replies']), trans('locale.reply'));
-});
-
-HTML::macro('topics', function($user)
-{
-    return link_to(join('?', [$user->username, 'tab=topic']), trans('locale.topic'));
-});
-
-HTML::macro('authTopics', function($user)
-{
-    return link_to(join('/', [$user->username, 'topics']), trans('locale.me'));
-});
-
-HTML::macro('watching', function($user)
-{
-    return link_to(join('/', [$user->username, 'watching']), trans('locale.watching'));
-});
-
-HTML::macro('likes', function($user)
-{
-    return link_to(join('/', [$user->username, 'likes']), trans('locale.likes'));
-});
-
-HTML::macro('categories', function()
-{
-    return link_to('admin/categories', trans('locale.category'));
-});
-
-HTML::macro('tags', function()
-{
-    return link_to('admin/tags', trans('locale.tag'));
-});
-
-HTML::macro('users', function()
-{
-    return link_to('admin/users', trans('locale.users'));
-});
-
-HTML::macro('admin', function()
-{
-    return link_to('admin', trans('locale.topic'));
-});
-
 HTML::macro('replyEvent', function(Topic $topic)
 {
     return join(' ', [trans('locale.reply'), link_to('topic/'.$topic->id, $topic->title)]);
@@ -103,4 +58,54 @@ Str::macro('activityUrl', function($user)
 Str::macro('topicUrl', function($user)
 {
     return url(join('?tab=', [$user->username, 'topic']));
+});
+
+Str::macro('repliesUrl', function($user)
+{
+    return url(join('/', [$user->username, 'replies']));
+});
+
+Str::macro('likesUrl', function($user)
+{
+    return url(join('/', [$user->username, 'likes']));
+});
+
+Str::macro('topicsUrl', function($user)
+{
+    return url(join('/', [$user->username, 'topics']));
+});
+
+Str::macro('watchingUrl', function($user)
+{
+    return url(join('/', [$user->username, 'watching']));
+});
+
+Str::macro('photosUrl', function($user)
+{
+    return url(join('/', [$user->username, 'photos']));
+});
+
+Str::macro('adminUrl', function()
+{
+    return url('admin');
+});
+
+Str::macro('categoriesUrl', function()
+{
+    return url(join('/', ['admin', 'categories']));
+});
+
+Str::macro('tagsUrl', function()
+{
+    return url(join('/', ['admin', 'tags']));
+});
+
+Str::macro('usersUrl', function()
+{
+    return url(join('/', ['admin', 'users']));
+});
+
+Str::macro('backendPhotosUrl', function()
+{
+    return url(join('/', ['admin', 'photos']));
 });

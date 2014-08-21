@@ -3,12 +3,7 @@
 @section('main')
     <div class="boxify">
         <div class="user tab">
-            <ul class="tab tab-four">
-                <li>{{ HTML::authTopics($user) }}</li>
-                <li class="actived">{{ HTML::likes($user) }}</li>
-                <li>{{ HTML::watching($user) }}</li>
-                <li>{{ HTML::replies($user) }}</li>
-            </ul>
+            @include('user._tab', ['number'=>1])
         </div>
         <ul class="list topic index">
             @foreach ($user->topics as $topic)

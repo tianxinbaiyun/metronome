@@ -3,12 +3,7 @@
 @section('main')
     <div class="boxify">
         <div class="tab tag">
-            <ul class="tab tab-four">
-                <li>{{ HTML::admin() }}</li>
-                <li>{{ HTML::categories() }}</li>
-                <li class="actived">{{ HTML::tags() }}</li>
-                <li>{{ HTML::users() }}</li>
-            </ul>
+            @include('backend._tab', ['number'=>2])
         </div>
         <div class="tag index">
 

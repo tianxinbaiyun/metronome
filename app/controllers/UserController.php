@@ -243,6 +243,8 @@ class UserController extends BaseController {
 
     public function photos($username)
     {
-
+        return View::make('user.photos')
+            ->withUser(Auth::user())
+            ->withTitle(Lang::get('locale.photos'));
     }
 }

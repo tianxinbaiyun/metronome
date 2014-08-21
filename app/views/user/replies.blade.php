@@ -3,12 +3,7 @@
 @section('main')
     <div class="boxify">
         <div class="user tab">
-            <ul class="tab tab-four">
-                <li>{{ HTML::authTopics($user) }}</li>
-                <li>{{ HTML::likes($user) }}</li>
-                <li>{{ HTML::watching($user) }}</li>
-                <li class="actived">{{ HTML::replies($user) }}</li>
-            </ul>
+            @include('user._tab', ['number'=>2])
         </div>
     </div>
 @stop

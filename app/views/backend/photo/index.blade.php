@@ -2,6 +2,9 @@
 
 @section('main')
     <div class="boxify">
+        <div class="photo tab">
+            @include('backend._tab', ['number'=>4])
+        </div>
         <ul class="photo index">
             @foreach ($photos as $photo)
                 <li>
