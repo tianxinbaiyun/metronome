@@ -94,7 +94,7 @@ class TopicController extends BaseController {
     public function edit($id)
     {
         $topic = Topic::with('category')->findOrFail($id);
-        $topic->body = $topic->markdown();
+        $topic->body = $topic->text->markdown;
 
         return View::make('topic.edit')
             ->withTitle(Lang::get('locale.edit_topic'))
@@ -120,9 +120,10 @@ class TopicController extends BaseController {
                 'body'        => Input::get('body')
             ]);
 
-            // $text = $topic->texts()->first();
-            // $text->content = Input::get('body');
-            // $text->save();
+            $topic->text()->update([
+                'markup'   => Sanitization::make(Markdown::make($body = Input::get('body'))),
+                'markdown' => $body
+            ]);
         }
 
         Session::flash('message', Lang::get('locale.topic_updated'));

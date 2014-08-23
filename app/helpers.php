@@ -32,6 +32,20 @@ Str::macro('matching', function($matcher)
 });
 
 /**
+ * Html Helpers
+ */
+
+HTML::macro('username', function($user)
+{
+    return link_to($user->downcase, $user->username);
+});
+
+HTML::macro('topic', function($topic)
+{
+    return link_to(join('/', ['topic', $topic->id]), $topic->title);
+});
+
+/**
  * User Url Helpers
  */
 

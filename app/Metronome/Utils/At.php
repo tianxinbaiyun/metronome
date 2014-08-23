@@ -1,6 +1,10 @@
 <?php namespace Metronome\Utils;
 
+use User;
+
 class At {
+
+    const MENTION_LIMIT = 3;
 
     protected $content;
     protected $users;
@@ -12,9 +16,23 @@ class At {
 
     public function mentions()
     {
-        return preg_match_all('/@(\w{3,20})/i', $this->content, $this->users)
+        $users = preg_match_all('/@(\w{3,20})/i', $this->content, $this->users)
             ? array_unique($this->users[1])
-            : null;
+            : [];
+
+        $this->users = [];
+
+        foreach ($users as $key => $username)
+        {
+            if ($key < self::MENTION_LIMIT)
+            {
+                $user = User::whereDowncase(strtolower($username))->first();
+
+                $user and array_push($this->users, $user);
+            }
+        }
+
+        return $this->users;
     }
 
     public function content()

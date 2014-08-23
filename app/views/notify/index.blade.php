@@ -2,6 +2,11 @@
 
 @section('main')
     <div class="boxify">
+
+    @foreach ($notifications as $notification)
+        {{ $notification->content }}
+    @endforeach
+
     </div>
 @stop
 

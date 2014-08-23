@@ -1,5 +1,7 @@
 <?php
 
+use Metronome\Repositories\NotifierRepository;
+
 class ReplyController extends BaseController {
 
     public function __construct()
@@ -38,19 +40,29 @@ class ReplyController extends BaseController {
                 'markup'   => $markup
             ]));
 
-            $activity = new Metronome\Repositories\ActivityRepository;
-            $activity->touch($topic)->replyEvent();
+            // $activity = new Metronome\Repositories\ActivityRepository;
+            // $activity->touch($topic)->replyEvent();
 
             if ($mentions = $at->mentions())
             {
+                $notifier = new NotifierRepository;
+
                 foreach ($mentions as $user) {
-                    Queue::push(function($job) use ($user)
-                    {
-                        // Notify::mention($user);
-                        $job->delete();
-                    });
+                    $notifier->notify($user)->mentioned($topic);
                 }
+
+                $notifier->send();
             }
+
+            // if ($watchers = $topic->watchers())
+            // {
+            //     foreach ($watchers as $watcher) {
+            //         Queue::push(function($job) use ($user)
+            //         {
+            //             $job->delete();
+            //         });
+            //     }
+            // }
         }
 
         return Redirect::to('topic/'.$topic->id);
