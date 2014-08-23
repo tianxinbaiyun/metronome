@@ -109,6 +109,7 @@ return [
     'august'           => '八月',
 
     'uncategoried_not_null' => '默认分类不为空',
+    'no_topics'             => '这个分类还没有任何主题',
 
 
 

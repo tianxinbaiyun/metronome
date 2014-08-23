@@ -34,6 +34,11 @@ class Topic extends Eloquent {
         return $this->morphToMany('Tag', 'taggable');
     }
 
+    public function watchers()
+    {
+        return $this->likers();
+    }
+
     public function scopePopular($query)
     {
         return $query->orderBy('ranking', 'desc')->orderBy('created_at', 'desc');

@@ -40,6 +40,11 @@ class TopicTest extends TestCase {
 
     }
 
+    public function testWatchers()
+    {
+
+    }
+
     public function testCreatedAt()
     {
         // $this->topic->createdAt();

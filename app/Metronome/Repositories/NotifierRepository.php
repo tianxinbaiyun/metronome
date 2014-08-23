@@ -70,7 +70,12 @@ class NotifierRepository {
 
     public function send()
     {
-        DB::table('notifications')->insert($this->notifications);
+        if ($notifications = $this->notifications)
+        {
+            DB::table('notifications')->insert($notifications);
+        }
+
+        $this->notifications = [];
     }
 
     private function setTemplate($template)

@@ -263,6 +263,14 @@ ul {
   }
 }
 
+.empty {
+  color: rgba(#000, .404);
+  text-align: center;
+  p {
+    line-height: 40px;
+  }
+}
+
 ::selection {
   text-shadow: none;
   background-color: #53575b;

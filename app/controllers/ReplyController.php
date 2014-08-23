@@ -43,26 +43,31 @@ class ReplyController extends BaseController {
             // $activity = new Metronome\Repositories\ActivityRepository;
             // $activity->touch($topic)->replyEvent();
 
+            $notifier = new NotifierRepository;
+
             if ($mentions = $at->mentions())
             {
-                $notifier = new NotifierRepository;
-
-                foreach ($mentions as $user) {
-                    $notifier->notify($user)->mentioned($topic);
+                foreach ($mentions as $user)
+                {
+                    if ($user->id != Auth::id())
+                    {
+                        $notifier->notify($user)->mentioned($topic);
+                    }
                 }
-
-                $notifier->send();
             }
 
-            // if ($watchers = $topic->watchers())
+            // $watchers = $topic->watchers();
+
+            foreach (User::all() as $user) {
+                $notifier->notify($user)->watchingReplied($topic);
+            }
+
+            $notifier->send();
+
+            // Queue::push(function($job) use ($user)
             // {
-            //     foreach ($watchers as $watcher) {
-            //         Queue::push(function($job) use ($user)
-            //         {
-            //             $job->delete();
-            //         });
-            //     }
-            // }
+            //     $job->delete();
+            // });
         }
 
         return Redirect::to('topic/'.$topic->id);
