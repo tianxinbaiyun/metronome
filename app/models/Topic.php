@@ -36,7 +36,7 @@ class Topic extends Eloquent {
 
     public function watchers()
     {
-        return $this->likers();
+        return $this->belongsToMany('User', 'topic_users');
     }
 
     public function scopePopular($query)

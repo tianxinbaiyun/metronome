@@ -91,6 +91,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->belongsToMany('Topic', 'likes');
     }
 
+    public function watching()
+    {
+        return $this->belongsToMany('Topic', 'topic_users');
+    }
+
     public function events()
     {
         return $this->hasMany('Metronome\Models\Event');
