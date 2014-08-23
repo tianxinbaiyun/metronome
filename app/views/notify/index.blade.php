@@ -2,11 +2,11 @@
 
 @section('main')
     <div class="boxify">
-
-    @foreach ($notifications as $notification)
-        {{ $notification->content }}
-    @endforeach
-
+        <ul class="notification index">
+            @foreach ($notifications as $notification)
+                <li>{{ $notification->content }}<span class="timeago pull_right" title="{{ $notification->created_at }}"></span></li>
+            @endforeach
+        </ul>
     </div>
 @stop
 

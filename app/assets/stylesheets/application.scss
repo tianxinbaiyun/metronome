@@ -452,6 +452,18 @@ ul {
   }
 }
 
+.notification {
+  &.index {
+    li {
+      padding: .5em 1em;
+      color: rgba(#000, .404);
+      a {
+        color: #2d92c9;
+      }
+    }
+  }
+}
+
 .photo {
   &.index {
     margin-top: 5px;
