@@ -11,14 +11,8 @@ class LikeController extends BaseController {
 
     public function __construct()
     {
-        // $this->beforeFilter('csrf', ['on'=>'post']);
-        // $this->beforeFilter('auth', ['only'=>['store', 'destroy']]);
-        $this->beforeFilter(function(){
-            if (Auth::guest()) {
-                $script = join(URL::to('login'), ['Turbolinks.visit(\'', '\');']);
-                return Response::make($script, 200)->header('Content-Type', 'application/javascript');
-            }
-        });
+        $this->beforeFilter('csrf', ['on'=>['post', 'delete']]);
+        $this->beforeFilter('auth.turbo', ['only'=>['store', 'destroy']]);
     }
 
     public function store($id)
@@ -34,9 +28,9 @@ class LikeController extends BaseController {
         ]);
 
         $url = URL::to(join('/', ['topic', $topic->id, 'unlike']));
-        $script = "$('.topic-opt>a').addClass('heart').data('method', 'delete').attr('href', '{$url}');";
+        $script = "$('.topic-opt>a:first').addClass('heart').data('method', 'delete').attr('href', '{$url}');";
 
-        return Response::make($script, 200)->header('Content-Type', 'application/javascript');
+        return Response::turbo($script);
     }
 
     public function destroy($id)
@@ -56,8 +50,8 @@ class LikeController extends BaseController {
         }
 
         $url = URL::to(join('/', ['topic', $topic->id, 'like']));
-        $script = "$('.topic-opt>a').removeClass('heart').data('method', 'post').attr('href', '{$url}');";
+        $script = "$('.topic-opt>a:first').removeClass('heart').data('method', 'post').attr('href', '{$url}');";
 
-        return Response::make($script, 200)->header('Content-Type', 'application/javascript');
+        return Response::turbo($script);
     }
 }

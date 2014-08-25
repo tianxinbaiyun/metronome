@@ -64,6 +64,18 @@ Route::filter('backendable', function()
     if (Auth::guest() or Auth::user()->normalUser()) return Redirect::to('/');
 });
 
+Route::filter('auth.turbo', function()
+{
+    if (Auth::guest())
+    {
+        if (Request::ajax())
+        {
+            return Response::turbo(join(url('login'), ['Turbolinks.visit(\'', '\');']));
+        }
+
+        return Redirect::to('404.html');
+    }
+});
 
 Route::filter('auth.basic', function()
 {

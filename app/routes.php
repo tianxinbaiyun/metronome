@@ -19,36 +19,32 @@ Route::group([
 Route::group(['prefix'=>'admin', 'namespace'=>'Metronome\Layers'], function()
 {
     Route::get('/', 'TopicController@index');
-    Route::get('topic/{id}/edit', 'TopicController@edit');
-    Route::put('topic/{id}', 'TopicController@update');
-    Route::delete('topic/{id}', 'TopicController@destroy');
+
+    Route::resource('topic', 'TopicController', ['only'=>['edit', 'update', 'destroy']]);
     Route::get('categories', 'CategoryController@index');
     Route::post('category/store', 'CategoryController@store');
-    Route::get('category/{id}/edit', 'CategoryController@edit');
-    Route::put('category/{id}', 'CategoryController@update');
-    Route::delete('category/{id}', 'CategoryController@destroy');
+
+    Route::resource('category', 'CategoryController', ['only'=>['edit', 'update', 'destroy']]);
+
     Route::get('users', 'UserController@index');
     Route::get('user/{id}', 'UserController@show');
     Route::get('photos', 'PhotoController@index');
-    Route::get('photo/{id}', 'PhotoController@show');
-    Route::post('photo/store', 'PhotoController@store');
-    Route::delete('photo/{id}', 'PhotoController@destroy');
-    Route::post('post/store', 'PostController@store');
+
+    Route::resource('photo', 'PhotoController', ['only'=>['store', 'show', 'destroy']]);
+
     Route::get('tags', 'TagController@index');
 });
 
 Route::get('forum', ['uses'=>'TopicController@index', 'as'=>'home']);
 
-Route::get('/', 'AliasController@index');
-Route::get('topic', 'AliasController@index');
-Route::get('topics', 'AliasController@index');
-Route::get('popular', 'AliasController@index');
+foreach (['/', 'topic', 'topics', 'popular'] as $action) {
+    Route::get($action, 'AliasController@index');
+}
+
 Route::get('topic/new', 'TopicController@create');
-Route::post('topic/store', 'TopicController@store');
-Route::get('topic/{id}', 'TopicController@show');
-Route::get('topic/{id}/edit', 'TopicController@edit');
-Route::put('topic/{id}', 'TopicController@update');
-Route::delete('topic/{id}', 'TopicController@destroy');
+
+Route::resource('topic', 'TopicController', ['except'=>['index', 'create']]);
+
 Route::get('category/{id}', 'TopicController@byCategory');
 Route::get('newest', 'TopicController@newest');
 
@@ -62,9 +58,10 @@ Route::group(['namespace'=>'User'], function()
 });
 
 Route::post('topic/{id}', 'ReplyController@store');
-Route::get('reply/{id}/edit', 'ReplyController@edit');
-Route::put('reply/{id}', 'ReplyController@update');
-Route::delete('reply/{id}', 'ReplyController@destroy');
+
+$reply_array = ['only'=>['edit', 'update', 'destroy']];
+
+Route::resource('reply', 'ReplyController', $reply_array);
 
 Route::get('search', 'SearchController@index');
 Route::post('search', 'SearchController@store');
@@ -90,13 +87,13 @@ Route::patch('settings/avatar', 'UserController@avatarUpdate');
 Route::get('settings/password', 'UserController@edit');
 Route::patch('settings/password', 'UserController@update');
 
-Route::get('{username}/likes', 'UserController@likes');
-Route::get('{username}/topics', 'UserController@topics');
-Route::get('{username}/replies', 'UserController@replies');
-Route::get('{username}/following', 'UserController@following');
-Route::get('{username}/followers', 'UserController@followers');
-Route::get('{username}/watching', 'UserController@watching');
-Route::get('{username}/photos', 'UserController@photos');
+// each do
+
+$user_array = ['likes', 'topics', 'replies', 'following', 'followers', 'watching', 'photos'];
+
+foreach ($user_array as $action) {
+    Route::get('{username}/'.$action, 'UserController@'.$action);
+}
 
 Route::get('forgot_password', 'ReminderController@getRemind');
 Route::post('password/remind', 'ReminderController@postRemind');
@@ -116,8 +113,6 @@ Event::listen('illuminate.query', function($query)
 
 });
 
-
-
 //==>>
 
 // Route::get('score/{id}', function($id)
@@ -128,7 +123,7 @@ Event::listen('illuminate.query', function($query)
 //     return $hour_age;
 // });
 
-Route::get('q/q', function()
+Route::get('queue/receiver', function()
 {
     $user = User::find(1);
 

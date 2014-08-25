@@ -32,6 +32,15 @@ Str::macro('matching', function($matcher)
 });
 
 /**
+ * Turbolinks Helpers
+ */
+
+Response::macro('turbo', function($script)
+{
+    return Response::make($script, 200)->header('Content-Type', 'application/javascript');
+});
+
+/**
  * Html Helpers
  */
 

@@ -4,8 +4,9 @@ use BaseController;
 
 class SubscribeController extends BaseController {
 
-    public function destroy($id)
+    public function __construct()
     {
-        var_dump(\Request::ajax());
+        $this->beforeFilter('csrf', ['on'=>['post', 'delete']]);
+        $this->beforeFilter('auth.turbo', ['only'=>['store', 'destroy']]);
     }
 }
