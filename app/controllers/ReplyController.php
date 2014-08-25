@@ -56,7 +56,7 @@ class ReplyController extends BaseController {
                 }
             }
 
-            foreach ($topic->watchers as $user) {
+            foreach ($topic->subscribers as $user) {
                 $notifier->notify($user)->watchingReplied($topic);
             }
 

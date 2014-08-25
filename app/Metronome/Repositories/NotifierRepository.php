@@ -21,7 +21,7 @@ class NotifierRepository {
         $this->auth_user = $user ?: Auth::user();
     }
 
-    public function notify(User $user, Topic $topic = null)
+    public function notify($user)
     {
         $this->notified_user = $user;
 

@@ -16,9 +16,9 @@
                 @endif
 
                 @if ($watcher_right = 1)
-                    <a href="{{ URL::to('topic/'.$topic->id.'/unwatch') }}" data-method="delete" data-remote="true" class="pull_right"><span class="icon-check"></span></a>
+                    <a href="{{ URL::to('topic/'.$topic->id.'/unsubscribe') }}" data-method="delete" data-remote="true" class="pull_right"><span class="icon-check"></span></a>
                 @else
-                    <a href="{{ URL::to('topic/'.$topic->id.'/watch') }}" data-method="post" data-remote="true" class="pull_right checked"><span class="icon-check"></span></a>
+                    <a href="{{ URL::to('topic/'.$topic->id.'/subscribe') }}" data-method="post" data-remote="true" class="pull_right checked"><span class="icon-check"></span></a>
                 @endif
             </div>
         </div>
