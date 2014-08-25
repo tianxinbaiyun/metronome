@@ -52,8 +52,14 @@ Route::delete('topic/{id}', 'TopicController@destroy');
 Route::get('category/{id}', 'TopicController@byCategory');
 Route::get('newest', 'TopicController@newest');
 
-Route::post('topic/{id}/like', 'LikeController@store');
-Route::delete('topic/{id}/unlike', 'LikeController@destroy');
+Route::group(['namespace'=>'User'], function()
+{
+    Route::post('topic/{id}/like', 'LikeController@store');
+    Route::delete('topic/{id}/unlike', 'LikeController@destroy');
+
+    Route::post('topic/{id}/subscribe', 'SubscribeController@store');
+    Route::delete('topic/{id}/unsubscribe', 'SubscribeController@destroy');
+});
 
 Route::post('topic/{id}', 'ReplyController@store');
 Route::get('reply/{id}/edit', 'ReplyController@edit');

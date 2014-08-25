@@ -29,14 +29,14 @@ class Topic extends Eloquent {
         return $this->morphToMany('Metronome\Models\Liker', 'likeable');
     }
 
+    public function subscribers()
+    {
+        return $this->morphToMany('Metronome\Models\Subscriber', 'subscribable');
+    }
+
     public function tags()
     {
         return $this->morphToMany('Tag', 'taggable');
-    }
-
-    public function watchers()
-    {
-        return $this->belongsToMany('User', 'topic_users');
     }
 
     public function scopePopular($query)

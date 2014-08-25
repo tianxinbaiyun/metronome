@@ -56,9 +56,7 @@ class ReplyController extends BaseController {
                 }
             }
 
-            // $watchers = $topic->watchers();
-
-            foreach (User::all() as $user) {
+            foreach ($topic->watchers as $user) {
                 $notifier->notify($user)->watchingReplied($topic);
             }
 
@@ -68,9 +66,14 @@ class ReplyController extends BaseController {
             // {
             //     $job->delete();
             // });
+
+            return Redirect::back();
         }
 
-        return Redirect::to('topic/'.$topic->id);
+        Session::flash('message', $validator->messages()->first());
+
+        return Redirect::to('topic/'.$topic->id)
+            ->withInput();
     }
 
     public function edit($id)

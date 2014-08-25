@@ -1,4 +1,11 @@
-<?php
+<?php namespace User;
+
+use URL;
+use Auth;
+use Topic;
+use Response;
+use BaseController;
+use Metronome\Models\Likeable;
 
 class LikeController extends BaseController {
 
@@ -20,7 +27,7 @@ class LikeController extends BaseController {
 
         if (! $topic) App::abort(404);
 
-        $likeable = Metronome\Models\Likeable::firstOrCreate([
+        $likeable = Likeable::firstOrCreate([
             'likeable_type' => 'Topic',
             'likeable_id'   => $topic->id,
             'liker_id'      => Auth::user()->id,
@@ -38,7 +45,7 @@ class LikeController extends BaseController {
 
         if (! $topic) App::abort(404);
 
-        $likeable = Metronome\Models\Likeable::whereLikerId(Auth::user()->id)
+        $likeable = Likeable::whereLikerId(Auth::user()->id)
             ->whereLikeableId($topic->id)
             ->whereLikeableType('Topic')
             ->first();

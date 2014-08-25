@@ -14,6 +14,12 @@
                 @else
                     <a href="{{ URL::to('topic/'.$topic->id.'/like') }}" data-method="post" data-remote="true"><span class="icon-heart"></span></a>
                 @endif
+
+                @if ($watcher_right = 1)
+                    <a href="{{ URL::to('topic/'.$topic->id.'/unwatch') }}" data-method="delete" data-remote="true" class="pull_right"><span class="icon-check"></span></a>
+                @else
+                    <a href="{{ URL::to('topic/'.$topic->id.'/watch') }}" data-method="post" data-remote="true" class="pull_right checked"><span class="icon-check"></span></a>
+                @endif
             </div>
         </div>
     </div>
@@ -21,6 +27,7 @@
         @include('partial.reply')
     @endif
     <div class="boxify">
+        @include('partial.flash')
         <div class="reply new">
             {{ Form::open(['url'=>'topic/'.$topic->id]) }}
                 <textarea name="content" placeholder="{{ Lang::get('locale.write_comment') }}"></textarea>

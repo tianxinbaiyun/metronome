@@ -2,7 +2,7 @@
 
 use Eloquent;
 
-class Liker extends Eloquent {
+class Subscriber extends Eloquent {
 
     protected $table = 'users';
 
@@ -10,6 +10,6 @@ class Liker extends Eloquent {
 
     public function topics()
     {
-        return $this->morphedByMany('Topic', 'likeable');
+        return $this->morphedByMany('Topic', 'subscribable');
     }
 }
