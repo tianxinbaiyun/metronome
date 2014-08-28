@@ -13,34 +13,12 @@
 
 App::before(function($request)
 {
-    Metronome\Utils\set_request_method_cookie($request);
+    Turbo::setUp();
 });
-
 
 App::after(function($request, $response)
 {
-    Metronome\Utils\set_xhr_redirected_to($request, $response);
-    if ($response instanceof Illuminate\Http\RedirectResponse) {
-        Metronome\Utils\store_for_turbolinks($request, $response->getTargetUrl());
-        Metronome\Utils\abort_xdomain_redirect($request, $response);
-    }
-
-    // "Turbolinks.visit('#{location}');"
-    // 'ContentType' => 'application/x-javascript'
-
-    // if (App::environment() != 'development') {
-    //     if ($response instanceof Illuminate\Http\Response) {
-    //         $output = $response->getOriginalContent();
-    //         $output = preg_replace('/<!--([^\[|(<!)].*)/', '', $output);
-    //         $output = preg_replace('/(?<!\S)\/\/\s*[^\r\n]*/', '', $output);
-    //         $output = preg_replace('/\s{2,}/', '', $output);
-    //         $output = preg_replace('/(\r?\n)/', '', $output);
-    //         $response->setContent($output);
-    //     }
-    // }
-
-    // This will filter all `pre`, `textarea` tags, not so good.
-    // Maybe has a pretty way.
+    Turbo::handle($request, $response);
 });
 
 /*

@@ -111,6 +111,7 @@ return [
         'Intervention\Image\ImageServiceProvider',
         'Metronome\Providers\SanitizationServiceProvider',
         'Metronome\Providers\MarkdownServiceProvider',
+        'Metronome\Providers\TurboServiceProvider',
 
     ],
 
@@ -180,6 +181,7 @@ return [
         'Image'           => 'Intervention\Image\Facades\Image',
         'Sanitization'    => 'Metronome\Facades\Sanitization',
         'Markdown'        => 'Metronome\Facades\Markdown',
+        'Turbo'           => 'Metronome\Facades\Turbo',
 
     ],
 

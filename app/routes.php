@@ -87,13 +87,10 @@ Route::patch('settings/avatar', 'UserController@avatarUpdate');
 Route::get('settings/password', 'UserController@edit');
 Route::patch('settings/password', 'UserController@update');
 
-// each do
-
-$user_array = ['likes', 'topics', 'replies', 'following', 'followers', 'watching', 'photos'];
-
-foreach ($user_array as $action) {
-    Route::get('{username}/'.$action, 'UserController@'.$action);
-}
+(new Illuminate\Support\Collection(['likes', 'topics', 'replies', 'following', 'followers', 'watching', 'photos']))->each(function($method)
+{
+    Route::get(join('/', ['{username}', $method]), join('@', ['UserController', $method]));
+});
 
 Route::get('forgot_password', 'ReminderController@getRemind');
 Route::post('password/remind', 'ReminderController@postRemind');

@@ -437,18 +437,27 @@ ul {
   a {
     display: inline-block;
     color: rgba(#000, .5);
+    min-width: 40px;
+    font-size: 20px;
+    text-align: center;
     &:first-child {
-      min-width: 40px;
-      font-size: 20px;
-      text-align: center;
       margin-left: .5em;
       &:hover {
         color: #eb1163;
       }
     }
+    &:last-child {
+      margin-right: .5em;
+      &:hover {
+        color: #89d26a;
+      }
+    }
   }
   .heart {
     color: #eb1163;
+  }
+  .checked {
+    color: #89d26a;
   }
 }
 
