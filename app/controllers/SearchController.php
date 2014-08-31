@@ -8,9 +8,4 @@ class SearchController extends BaseController {
             ->withTopics(Topic::search(Input::get('q')))
             ->withTitle(Lang::get('locale.search'));
     }
-
-    public function store()
-    {
-        return Redirect::to('search?q='.Input::get('keyword'));
-    }
 }

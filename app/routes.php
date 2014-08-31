@@ -59,7 +59,6 @@ Route::group(['namespace'=>'User'], function()
 Route::resource('reply', 'ReplyController', ['only'=>['store', 'edit', 'update', 'destroy']]);
 
 Route::get('search', 'SearchController@index');
-Route::post('search', 'SearchController@store');
 
 Route::get('login', 'SessionController@create');
 Route::get('session/new', 'AliasController@login');
