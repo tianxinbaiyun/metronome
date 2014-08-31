@@ -15,10 +15,10 @@
 
 .primary {
   color: #fefef3;
-  border: 1px solid darken(#5fcf80, 3%);
-  background-color: #5fcf80;
+  border: 1px solid #43474b;
+  background-color: #53575b;
   &:hover {
-    border: 1px solid darken(#5fcf80, 8%);
-    background-color: darken(#5fcf80, 5%);
+    border: 1px solid #53575b;
+    background-color: darken(#53575b, 5%);
   }
 }

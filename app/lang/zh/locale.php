@@ -98,6 +98,8 @@ return [
     'newest_topic'     => '最新话题',
     'edit_reply'       => '编辑回复',
 
+    'create_tag'       => '新建标签',
+
     'followed'         => '开始关注你',
     'mentioned'        => '在回复主题 :topic 中提及了你',
     'watching_replied' => '回复了你关注的主题 :topic',

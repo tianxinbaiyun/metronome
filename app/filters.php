@@ -13,6 +13,8 @@
 
 App::before(function($request)
 {
+    App::setLocale('zh');
+    Config::set('app.timezone', 'Asia/Shanghai');
     Turbo::setUp();
 });
 

@@ -25,6 +25,8 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Metronome\Layers'], function()
     Route::get('categories', 'CategoryController@index');
     Route::resource('category', 'CategoryController', ['only'=>['store', 'edit', 'update', 'destroy']]);
 
+    Route::resource('tag', 'TagController', ['only'=>['store', 'edit', 'destroy']]);
+
     Route::get('users', 'UserController@index');
     Route::get('user/{id}', 'UserController@show');
     Route::get('photos', 'PhotoController@index');
@@ -56,7 +58,8 @@ Route::group(['namespace'=>'User'], function()
     Route::delete('topic/{id}/unsubscribe', 'SubscribeController@destroy');
 });
 
-Route::resource('reply', 'ReplyController', ['only'=>['store', 'edit', 'update', 'destroy']]);
+Route::post('topic/{id}', 'ReplyController@store');
+Route::resource('reply', 'ReplyController', ['only'=>['edit', 'update', 'destroy']]);
 
 Route::get('search', 'SearchController@index');
 

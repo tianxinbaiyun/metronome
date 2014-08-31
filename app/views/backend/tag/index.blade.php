@@ -8,6 +8,12 @@
         <div class="tag index">
 
         </div>
+        <div class="tag new">
+            {{ Form::open(['route'=>'admin.tag.store']) }}
+                {{ Form::text('name') }}
+                {{ Form::submit(Lang::get('locale.create_tag'), ['class'=>'btn primary']) }}
+            {{ Form::close() }}
+        </div>
     </div>
 @stop
 
