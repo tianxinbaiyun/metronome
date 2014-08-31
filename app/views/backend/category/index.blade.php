@@ -15,7 +15,7 @@
             @endforeach
         </ul>
         <div class="category new">
-            {{ Form::open(['url'=>'admin/category/store']) }}
+            {{ Form::open(['route'=>'admin.category.store']) }}
                 {{ Form::label('name', Lang::get('locale.name')) }}
                 {{ Form::text('name') }}
                 {{ Form::label('slug', Lang::get('locale.slug')) }}

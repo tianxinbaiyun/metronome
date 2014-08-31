@@ -9,11 +9,11 @@
                 {{ Form::text('account') }}
                 {{ Form::label('password', Lang::get('locale.password')) }}
                 {{ Form::password('password') }}
-                <label class="rememberme">
+                <label class="remember_me">
                     {{ Form::checkbox('remember_me') }}
                     <span>{{ Lang::get('locale.remember_me') }}</span>
                 </label>
-                <span class="pull_right"><a href="{{ URL::to('forgot_password') }}">{{ Lang::get('locale.forgot_password') }}</a></span>
+                <span class="forgot_password pull_right"><a href="{{ URL::to('forgot_password') }}">{{ Lang::get('locale.forgot_password') }}</a></span>
                 {{ Form::submit(Lang::get('locale.login'), ['class'=>'btn normal']) }}
             {{ Form::close() }}
         </div>

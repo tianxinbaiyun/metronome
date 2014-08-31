@@ -249,6 +249,15 @@ ul {
       margin-bottom: .5em;
       width: 100%;
     }
+    .forgot_password {
+      padding-right: .5em;
+      a {
+        color: rgba(#000, .5);
+        &:hover {
+          color: #53575b;
+        }
+      }
+    }
   }
 }
 
