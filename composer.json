@@ -30,7 +30,8 @@
         "uikit/uikit": "2.8.0",
         "erusev/parsedown": "1.0.1",
         "laravel/framework": "4.2.0",
-        "intervention/image": "2.0.5",
+        "intervention/image": "2.0.8",
+        "intervention/imagecache": "2.0.3",
         "ezyang/htmlpurifier": "4.6.0"
     },
     "require-dev": {

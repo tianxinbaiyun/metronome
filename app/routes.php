@@ -21,10 +21,9 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Metronome\Layers'], function()
     Route::get('/', 'TopicController@index');
 
     Route::resource('topic', 'TopicController', ['only'=>['edit', 'update', 'destroy']]);
-    Route::get('categories', 'CategoryController@index');
-    Route::post('category/store', 'CategoryController@store');
 
-    Route::resource('category', 'CategoryController', ['only'=>['edit', 'update', 'destroy']]);
+    Route::get('categories', 'CategoryController@index');
+    Route::resource('category', 'CategoryController', ['only'=>['store', 'edit', 'update', 'destroy']]);
 
     Route::get('users', 'UserController@index');
     Route::get('user/{id}', 'UserController@show');
@@ -57,20 +56,16 @@ Route::group(['namespace'=>'User'], function()
     Route::delete('topic/{id}/unsubscribe', 'SubscribeController@destroy');
 });
 
-Route::post('topic/{id}', 'ReplyController@store');
-
-$reply_array = ['only'=>['edit', 'update', 'destroy']];
-
-Route::resource('reply', 'ReplyController', $reply_array);
+Route::resource('reply', 'ReplyController', ['only'=>['store', 'edit', 'update', 'destroy']]);
 
 Route::get('search', 'SearchController@index');
 Route::post('search', 'SearchController@store');
 
 Route::get('login', 'SessionController@create');
 Route::get('session/new', 'AliasController@login');
-Route::post('session/store', 'SessionController@store');
+
 Route::delete('logout', 'SessionController@destroy');
-Route::delete('session/destroy', 'SessionController@destroy');
+Route::resource('session', 'SessionController', ['only'=>['store', 'destroy']]);
 Route::get('logout', 'SessionController@logout');
 
 Route::get('signup', 'UserController@create');
@@ -87,10 +82,9 @@ Route::patch('settings/avatar', 'UserController@avatarUpdate');
 Route::get('settings/password', 'UserController@edit');
 Route::patch('settings/password', 'UserController@update');
 
-(new Illuminate\Support\Collection(['likes', 'topics', 'replies', 'following', 'followers', 'watching', 'photos']))->each(function($method)
-{
+foreach (['likes', 'topics', 'replies', 'following', 'followers', 'watching', 'photos'] as $method) {
     Route::get(join('/', ['{username}', $method]), join('@', ['UserController', $method]));
-});
+}
 
 Route::get('forgot_password', 'ReminderController@getRemind');
 Route::post('password/remind', 'ReminderController@postRemind');
@@ -98,6 +92,8 @@ Route::get('password/reset/{token}', 'ReminderController@getReset');
 Route::post('password/reset', 'ReminderController@postReset');
 
 Route::get('notification', 'NotificationController@index');
+
+Route::resource('notification', 'NotificationController', ['only'=>['destroy']]);
 
 Route::post('follow', 'RelationshipController@store');
 Route::delete('unfollow', 'RelationshipController@destroy');
@@ -107,10 +103,18 @@ Route::get('{username}', 'UserController@profileShow');
 
 Event::listen('illuminate.query', function($query)
 {
-
+    if (App::environment() == 'local')
+    {
+        Log::info($query);
+    }
 });
 
 //==>>
+
+Route::get('via/turbo', function()
+{
+    return Turbo::redirectViaTurbolinksTo('admin');
+});
 
 // Route::get('score/{id}', function($id)
 // {

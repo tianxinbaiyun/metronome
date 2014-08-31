@@ -29,6 +29,11 @@ Event::listen('reply.mention', function(array $mentions)
 
 });
 
+App::error(function(Illuminate\Database\Eloquent\ModelNotFoundException $exception)
+{
+    return ['404.html'];
+});
+
 // View::composer(['topics.*', 'users.*'], function($view)
 // {
 //     $view->with('stat', Stat::orderBy('id', 'desc')->first());

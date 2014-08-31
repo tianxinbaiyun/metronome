@@ -3,6 +3,7 @@
 use Cookie;
 use Request;
 use Session;
+use Response;
 use Illuminate\Http\RedirectResponse;
 
 class Turbo {

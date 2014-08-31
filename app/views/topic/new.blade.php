@@ -4,7 +4,7 @@
     <div class="boxify">
         @include('partial.flash')
         <div class="topic new">
-            {{ Form::open(['url'=>'topic/store']) }}
+            {{ Form::open(['route'=>'topic.store']) }}
                 {{ Form::label('title', Lang::get('locale.title')) }}
                 {{ Form::text('title') }}
                 {{ Form::label('body', Lang::get('locale.body')) }}

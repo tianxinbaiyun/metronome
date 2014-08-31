@@ -16,7 +16,7 @@
                 <div class="photo new">
                     {{ HTML::image('assets/square.png') }}
                     <div class="uploader square"><span class="icon-upload"></span></div>
-                    {{ Form::open(['url'=>URL::to('admin/photo/store'), 'method'=>'post', 'files'=>true]) }}
+                    {{ Form::open(['route'=>'admin.photo.store', 'method'=>'post', 'files'=>true]) }}
                         {{ Form::file('photo', ['class'=>'auto']) }}
                     {{ Form::close() }}
                 </div>
