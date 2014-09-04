@@ -36,18 +36,27 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Metronome\Layers'], function()
     Route::get('tags', 'TagController@index');
 });
 
-Route::get('forum', ['uses'=>'TopicController@index', 'as'=>'home']);
 
-foreach (['/', 'topic', 'topics', 'popular'] as $action) {
+/**
+ * Frontend Routes
+ */
+
+Route::get('forum', ['uses'=>'TopicController@index', 'as'=>'home']);
+Route::get('topic/new', ['uses'=>'TopicController@create', 'as'=>'topic.new']);
+Route::resource('topic', 'TopicController', ['except'=>['index', 'create']]);
+
+foreach (['/', 'topic', 'topics', 'popular'] as $action)
+{
     Route::get($action, 'AliasController@index');
 }
 
-Route::get('topic/new', 'TopicController@create');
-
-Route::resource('topic', 'TopicController', ['except'=>['index', 'create']]);
-
-Route::get('category/{id}', 'TopicController@byCategory');
 Route::get('newest', 'TopicController@newest');
+Route::get('category/{id}', 'TopicController@byCategory');
+
+Route::get('search', 'SearchController@index');
+
+Route::post('topic/{id}', ['uses'=>'ReplyController@store', 'as'=>'reply.store']);
+Route::resource('reply', 'ReplyController', ['only'=>['edit', 'update', 'destroy']]);
 
 Route::group(['namespace'=>'User'], function()
 {
@@ -57,11 +66,6 @@ Route::group(['namespace'=>'User'], function()
     Route::post('topic/{id}/subscribe', 'SubscribeController@store');
     Route::delete('topic/{id}/unsubscribe', 'SubscribeController@destroy');
 });
-
-Route::post('topic/{id}', 'ReplyController@store');
-Route::resource('reply', 'ReplyController', ['only'=>['edit', 'update', 'destroy']]);
-
-Route::get('search', 'SearchController@index');
 
 Route::get('login', 'SessionController@create');
 Route::get('session/new', 'AliasController@login');

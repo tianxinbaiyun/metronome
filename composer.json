@@ -28,8 +28,9 @@
         "php": ">=5.4.3",
         "menglr/pkgjs": "1.2",
         "uikit/uikit": "2.8.0",
+        "illuminate/html": "4.3.*",
         "erusev/parsedown": "1.0.1",
-        "laravel/framework": "4.2.0",
+        "laravel/framework": "4.3.*",
         "intervention/image": "2.0.8",
         "intervention/imagecache": "2.0.3",
         "ezyang/htmlpurifier": "4.6.0"

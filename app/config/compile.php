@@ -13,4 +13,12 @@ return [
     |
     */
 
+    'files' => [
+
+    ],
+
+    'providers' => [
+
+    ],
+
 ];
